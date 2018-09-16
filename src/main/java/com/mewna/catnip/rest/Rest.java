@@ -10,20 +10,16 @@ import lombok.experimental.Accessors;
  * @since 9/1/18.
  */
 @Accessors(fluent = true)
+@Getter
 @SuppressWarnings({"WeakerAccess", "unused"})
 public class Rest {
-    @Getter
     private final RestChannel channel;
-    @Getter
     private final RestGuild guild;
-    @Getter
     private final RestUser user;
-    @Getter
     private final RestEmoji emoji;
-    @Getter
     private final RestInvite invite;
-    @Getter
     private final RestVoice voice;
+    private final RestWebhook webhook;
     
     public Rest(final CatnipImpl catnip) {
         channel = new RestChannel(catnip);
@@ -32,5 +28,6 @@ public class Rest {
         emoji = new RestEmoji(catnip);
         invite = new RestInvite(catnip);
         voice = new RestVoice(catnip);
+        webhook = new RestWebhook(catnip);
     }
 }

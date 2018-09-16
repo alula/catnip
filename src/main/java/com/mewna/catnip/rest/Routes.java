@@ -161,7 +161,14 @@ public final class Routes {
     public static final Route CREATE_DM                           = new Route(POST,   "/users/@me/channels");
     public static final Route LEAVE_GUILD                         = new Route(DELETE, "/users/@me/guilds/{guild.id}");
     public static final Route GET_USER                            = new Route(GET,    "/users/{user.id}");
-
+    
+    public static final Route GET_WEBHOOK                         = new Route(GET,    "/webhooks/{webhook.id}", "webhook.id");
+    public static final Route GET_WEBHOOK_WITH_TOKEN              = new Route(GET,    "/webhooks/{webhook.id}/{webhook.token}", "webhook.id");
+    public static final Route MODIFY_WEBHOOK                      = new Route(PATCH,  "/webhooks/{webhook.id}", "webhook.id");
+    public static final Route MODIFY_WEBHOOK_WITH_TOKEN           = new Route(PATCH,  "/webhooks/{webhook.id}/{webhook.token}", "webhook.id");
+    public static final Route DELETE_WEBHOOK                      = new Route(DELETE, "/webhooks/{webhook.id}", "webhook.id");
+    public static final Route DELETE_WEBHOOK_WITH_TOKEN           = new Route(DELETE, "/webhooks/{webhook.id}/{webhook.token}", "webhook.id");
+    
     public static final Route GET_CURRENT_APPLICATION_INFORMATION = new Route(GET,    "/oauth2/applications/@me");
     public static final Route LIST_VOICE_REGIONS                  = new Route(GET,    "/voice/regions");
     // @formatter:on

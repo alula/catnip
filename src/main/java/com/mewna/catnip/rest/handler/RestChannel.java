@@ -7,6 +7,7 @@ import com.mewna.catnip.internal.CatnipImpl;
 import com.mewna.catnip.rest.ResponsePayload;
 import com.mewna.catnip.rest.RestRequester.OutboundRequest;
 import com.mewna.catnip.rest.Routes;
+import com.mewna.catnip.rest.webhook.WebhookData;
 import com.mewna.catnip.rest.invite.InviteCreateOptions;
 import io.vertx.core.json.JsonObject;
 
@@ -26,7 +27,7 @@ import java.util.concurrent.CompletableFuture;
  * @author amy
  * @since 9/3/18.
  */
-@SuppressWarnings({"unused", "WeakerAccess", "ConstantConditions"})
+@SuppressWarnings({"unused", "WeakerAccess", "ConstantConditions", "TypeMayBeWeakened"})
 public class RestChannel extends RestHandler {
     public RestChannel(final CatnipImpl catnip) {
         super(catnip);

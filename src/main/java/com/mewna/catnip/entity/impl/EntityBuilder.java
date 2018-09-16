@@ -31,7 +31,6 @@ import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -39,7 +38,7 @@ import java.util.stream.Collectors;
  * @author natanbc
  * @since 9/2/18.
  */
-@SuppressWarnings({"WeakerAccess", "unused"})
+@SuppressWarnings({"WeakerAccess", "TypeMayBeWeakened", "OverlyCoupledClass", "unused"})
 public final class EntityBuilder {
     private static final JsonArray EMPTY_JSON_ARRAY = new JsonArray();
     
@@ -311,7 +310,8 @@ public final class EntityBuilder {
     @Nonnull
     @CheckReturnValue
     public Channel createChannel(@Nonnull final JsonObject data) {
-        ChannelType type = ChannelType.byKey(data.getInteger("type"));
+        final ChannelType type = ChannelType.byKey(data.getInteger("type"));
+        
         switch(type) {
             case TEXT: return createTextChannel(data);
             case DM: return createUserDM(data);
@@ -598,6 +598,23 @@ public final class EntityBuilder {
                 .optimal(data.getBoolean("optimal", false))
                 .deprecated(data.getBoolean("deprecated", false))
                 .custom(data.getBoolean("custom", false))
+                .build();
+    }
+    
+    @Nonnull
+    @CheckReturnValue
+    public Webhook createWebhook(@Nonnull final JsonObject data) {
+        final JsonObject userRaw = data.getJsonObject("user");
+        
+        return WebhookImpl.builder()
+                .catnip(catnip)
+                .id(data.getString("id"))
+                .guildId(data.getString("guild_id"))
+                .channelId(data.getString("channel_id"))
+                .user(userRaw == null ? null : createUser(userRaw))
+                .name(data.getString("name"))
+                .avatar(data.getString("avatar"))
+                .token(data.getString("token"))
                 .build();
     }
 }
